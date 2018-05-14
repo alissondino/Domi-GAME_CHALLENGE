@@ -14,8 +14,5 @@ $criaUsuario->comEmail("alisson_dina@estudante.sc.senai.br");
 $criaUsuario->comDateBirth("1999-03-30");
 $criaUsuario->comLvlUser("jogador");
 
-
-
-echo "<pre>";
-
+echo "teste do git hub na linha 17 do arquivo PHP para gerar usuários novos!";
 ?>

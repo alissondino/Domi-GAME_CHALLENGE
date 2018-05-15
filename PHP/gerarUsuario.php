@@ -1,18 +1,22 @@
 <?php
 
 require_once("Usuario.php");
-require_once("geradorDeUsuarios.php");
+require_once("UserBuilder.php");
 
 
 
-$criaUsuario = new geradorDeUsuarios(); 
+$buildingUser = new UserBuilder(); 
 
-$criaUsuario->comUser("Alisson");
-$criaUsuario->comPass("123456");
-$criaUsuario->comName("Alisson Gabriel Dino Costa");
-$criaUsuario->comEmail("alisson_dina@estudante.sc.senai.br");
-$criaUsuario->comDateBirth("1999-03-30");
-$criaUsuario->comLvlUser("jogador");
+$buildingUser->comUser("Alisson");
+$buildingUser->comPass("123456");
+$buildingUser->comName("Alisson Gabriel Dino Costa");
+$buildingUser->comEmail("alisson_dina@estudante.sc.senai.br");
+$buildingUser->comDateBirth('1999-03-30');
+$buildingUser->comLvlUser("jogador");
 
-echo "teste do git hub na linha 17 do arquivo PHP para gerar usuários novos!";
+$usuario = $buildingUser->build();
+echo "<pre>";
+var_dump($usuario);
+// $usuarioNovo = $geradorDeUsuarios->gerar();
+
 ?>

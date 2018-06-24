@@ -1,0 +1,42 @@
+Olá!
+
+Para que você consiga acesar o game por sua URL, crie um virtual host com Apache e Windows, seguindo os passos abaixo:
+
+1- Entre na sua pasta apache
+2- Entre na pasta conf
+3- Entre na pasta extra
+4- Edite o arquivo -> httpd-vhosts.conf
+5- Ao fim do arquivo adicione o seguinte:
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@dummy-host2.example.com
+    DocumentRoot "C:/apache/htdocs"
+    ServerName domi.com.br
+    ErrorLog "logs/dummy-host2.example.com-error.log"
+    CustomLog "logs/dummy-host2.example.com-access.log" common
+    <Directory "C:/apache/htdocs">
+        Order allow,deny
+        Allow from all
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+OBSERVAÇÕES - Lembre-se de ajustar os caminhos dos arquivos de acordo com a estrutura que vocês criarem
+
+
+6- Salve e feche esse arquivo
+7- Entre na pasta Windows
+8- Entre na pasta System32
+9- Entre na pasta Drivers
+10- Entre na pasta etc
+11- Edite o arquivo hosts
+12- No fim do arquvio, adicione o seguinte -> 127.0.0.1       domi.com.br
+13- Reinicie o serviço do Apache
+
+Pronto!!
+
+#Alisson_Dino
+#Web Developer
+
+
+

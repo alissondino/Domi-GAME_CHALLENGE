@@ -1,9 +1,19 @@
 <?php 
-	echo "Teste";
- ?>
+
+require_once("vendor/autoload.php");   
+
+$app = new \Slim\Slim();
+
+
+$app->get('/',function(){
+	echo "HOME PAGE";
+});
+
+$app->run();
+
+?>
 
 
 
 
 
- 

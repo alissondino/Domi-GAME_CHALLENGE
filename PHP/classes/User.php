@@ -200,6 +200,14 @@ class User{
         return $sql -> select("SELECT * FROM tb_users ORDER BY name_user;");
     }
 
+    //Função para buscar por um login sem saber exatamente qual é o mesmo usando LIKE
+    public static function searchList($login){
+        $sql = new Sql();
+        return $sql -> select("SELECT * FROM tb_users WHERE login_user LIKE :SEARCH ORDER BY login_user;",array(
+            ':SEARCH'=>"%".$login."%"
+        ));
+    }
+
 
     //Função que vai imprimir bonitinho as informações do objeto que foi preenchido em uma string
     public function __toString(){

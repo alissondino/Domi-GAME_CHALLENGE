@@ -4,12 +4,12 @@ $conn = new PDO("mysql:host=localhost;dbname=dbdomi_challenge","root","");
 $stmt = $conn->prepare("INSERT INTO tb_users(name_user,last_name_user,birth_date_user,email_user,login_user,password_user,last_update)
 	VALUES(:NAME,:LAST_NAME,:DATE_BIRTH,:EMAIL,:LOGIN,:PASSWORD,:L_UPDATE)");
  
-$name = 'Alisson';
-$last_name = 'Dino';
-$date_birth = '1999-03-30';
-$email = 'alisson_dina@estudante.sc.senai.br';
-$login = 'dino';
-$password = '123456';
+$name = 'Tereza';
+$last_name = 'Santos';
+$date_birth = '1998-10-22';
+$email = 'tereza.santos@gmail.com.br';
+$login = 'Dina';
+$password = 'lala123lala';
 $l_update = date("Y-m-d H:i:s");
 
 $stmt -> bindParam(":NAME",$name);

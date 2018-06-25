@@ -209,19 +209,44 @@ class User{
     }
 
 
-    //Função que vai imprimir bonitinho as informações do objeto que foi preenchido em uma string
-    public function __toString(){
-        return json_encode(array(
-            "id_user"=>$this->getIdUser(),
-            "name_user"=>$this->getNameUser(),
-            "last_name_user"=>$this->getLastNameUser(),
-            "date_birth_user"=>$this -> getBirthDate(),
-            "email_user"=>$this -> getEmailUser(),
-            "login_user"=>$this -> getLoginUser(),
-            "password_user"=>$this->getPassword(),
-            "last_update"=>$this->getLastUpdate()
-        ));
+
+
+
+    //Função para validar o login de um usuário no sistema,
+    public function validateLogin($plogin,$ppassword){
+     $sql = new Sql();
+     $results = $sql -> select("SELECT * FROM tb_users WHERE  login_user = :LOGIN AND password_user=:PASSWORD",array(
+        ":LOGIN"=>$plogin,
+        ":PASSWORD"=>$ppassword
+    ));
+     if (count($results)>0){
+        $row = $results[0];
+        $this -> setIdUser($row['id_user']); 
+        $this -> setNameUser($row['name_user']); 
+        $this -> setLastNameUser($row['last_name_user']); 
+        $this -> setBirthDateUser($row['birth_date_user']); 
+        $this -> setEmailUser($row['email_user']); 
+        $this -> setLoginUser($row['login_user']); 
+        $this -> setPassword($row['password_user']); 
+        $this -> setLastUpdate($row['last_update']);
+    }else{
+        throw new Exception("Login e/ou senha Invalidos!");
     }
+}
+
+    //Função que vai imprimir bonitinho as informações do objeto que foi preenchido em uma string
+public function __toString(){
+    return json_encode(array(
+        "id_user"=>$this->getIdUser(),
+        "name_user"=>$this->getNameUser(),
+        "last_name_user"=>$this->getLastNameUser(),
+        "date_birth_user"=>$this -> getBirthDate(),
+        "email_user"=>$this -> getEmailUser(),
+        "login_user"=>$this -> getLoginUser(),
+        "password_user"=>$this->getPassword(),
+        "last_update"=>$this->getLastUpdate()
+    ));
+}
 }
 
 

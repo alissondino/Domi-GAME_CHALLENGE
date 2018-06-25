@@ -175,6 +175,17 @@ class User{
         return $this;
     }
 
+    //Faz o preenchimentos dos dados - Resolvi criar um  método para isso pois já tinha repetido várias vezes o mesmo trecho
+    public function fillData($data){
+        $this -> setIdUser($data['id_user']); 
+        $this -> setNameUser($data['name_user']); 
+        $this -> setLastNameUser($data['last_name_user']); 
+        $this -> setBirthDateUser($data['birth_date_user']); 
+        $this -> setEmailUser($data['email_user']); 
+        $this -> setLoginUser($data['login_user']); 
+        $this -> setPassword($data['password_user']); 
+        $this -> setLastUpdate($data['last_update']);
+    }
     public function loadById($id){
         //Essa função carrega nos atributos do objeto os valores do banco
         $sql = new Sql();
@@ -183,15 +194,7 @@ class User{
         ));
 
         if (count($results)>0){
-            $row = $results[0];
-            $this -> setIdUser($row['id_user']); 
-            $this -> setNameUser($row['name_user']); 
-            $this -> setLastNameUser($row['last_name_user']); 
-            $this -> setBirthDateUser($row['birth_date_user']); 
-            $this -> setEmailUser($row['email_user']); 
-            $this -> setLoginUser($row['login_user']); 
-            $this -> setPassword($row['password_user']); 
-            $this -> setLastUpdate($row['last_update']); 
+            $this->fillData($results[0]);
         }
     }
     //Função para listar todos os usuários de uma tabela
@@ -220,19 +223,33 @@ class User{
         ":PASSWORD"=>$ppassword
     ));
      if (count($results)>0){
-        $row = $results[0];
-        $this -> setIdUser($row['id_user']); 
-        $this -> setNameUser($row['name_user']); 
-        $this -> setLastNameUser($row['last_name_user']); 
-        $this -> setBirthDateUser($row['birth_date_user']); 
-        $this -> setEmailUser($row['email_user']); 
-        $this -> setLoginUser($row['login_user']); 
-        $this -> setPassword($row['password_user']); 
-        $this -> setLastUpdate($row['last_update']);
+        $this->fillData($results[0]);
     }else{
         throw new Exception("Login e/ou senha Invalidos!");
     }
 }
+
+//Função para inserir um novo usuário na tabela tb_users
+public function insertUser(){
+    $sql = new Sql();
+
+    $results = $sql -> select("CALL sp_users_insert(
+        :NAME,:LAST_NAME,:BIRTH_DATE,:EMAIL,
+        :LOGIN,:PASSWORD,:LAST_UPDATE",array(
+            ':NAME'=>$this->getNameUser();
+            ':LAST_NAME'=>$this->getLastNameUser();
+            ':BIRTH_DATE'=>$this->getBirthDate();
+            ':EMAIL'=>$this->getEmailUser();
+            ':LOGIN'=>$this->getLoginUser();
+            ':PASSWORD'=>$this->getPassword();
+            ':LAST_UPDATE'=>$this->getLastUpdate();
+        ));
+    if(count($results)>0){
+        $this->fillData($results[0]);
+    }
+}
+
+
 
     //Função que vai imprimir bonitinho as informações do objeto que foi preenchido em uma string
 public function __toString(){

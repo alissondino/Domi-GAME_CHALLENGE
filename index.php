@@ -18,6 +18,18 @@ require_once("config.php");
 //Testando a validação de um usuário com o metódo validateLogin
 // $TryLogin = new User();
 // $TryLogin -> validateLogin("putonho","59");
+// echo $TryLogin;
 
-echo $TryLogin;
+$newUser = new User();
+$newUser->setNameUser("Gabriel");
+$newUser->setLastNameUser("Chuller");
+$newUser->setBirthDate('2002-11-03');
+$newUser->setEmailUser("chulinho_crei_crei@gmail.com");
+$newUser->setLoginUser("chulis");
+$newUser->setPassword("chulischulisc12");
+$newUser->setLastUpdate(date("Y-m-d H:i:s"));
+
+$newUser->insertUser();
+
+echo $newUser;
 ?>

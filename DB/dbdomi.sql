@@ -37,3 +37,24 @@ CREATE TABLE IF NOT EXISTS tb_bosses(
 	room_number INT(2) NOT NULL,
 	last_update TIMESTAMP NOT NULL
 );
+
+USE dbdomi_challenge;
+DROP PROCEDURE IF EXISTS sp_users_insert;
+DELIMITER $$
+CREATE PROCEDURE IF NOT EXISTS sp_users_insert(
+	p_user_name VARCHAR(64), p_last_name VARCHAR(64),p_birth_date DATE,
+	p_email VARCHAR(64),p_login VARCHAR(25),p_password VARCHAR(25),	p_last_update TIMESTAMP
+	)
+BEGIN
+INSERT INTO tb_users (
+	user_name,	last_name_user,	birth_date_user,
+	email_user,	login_user,	password_user,	last_update
+	) 
+VALUES(
+	p_user_name, p_last_name, p_birth_date,	p_email,
+	p_login,p_password,	p_last_update);
+	
+	SELECT * FROM tb_users WHERE id_user = LAST_INSERT_ID;
+
+END $$
+DELIMITER ;

@@ -194,6 +194,11 @@ class User{
             $this -> setLastUpdate($row['last_update']); 
         }
     }
+    //Função para listar todos os usuários de uma tabela
+    public static function getList(){
+        $sql = new Sql();
+        return $sql -> select("SELECT * FROM tb_users ORDER BY name_user;");
+    }
 
 
     //Função que vai imprimir bonitinho as informações do objeto que foi preenchido em uma string

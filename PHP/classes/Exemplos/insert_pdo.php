@@ -1,5 +1,5 @@
 <?php 
-$conn = new PDO("mysql:host=localhost;dbname=dbdomi_challenge","root","");
+$conn = new PDO("mysql:host=localhost;dbname=dbdomi_challenge","root","root");
 
 $stmt = $conn->prepare("INSERT INTO tb_users(name_user,last_name_user,birth_date_user,email_user,login_user,password_user,last_update)
 	VALUES(:NAME,:LAST_NAME,:DATE_BIRTH,:EMAIL,:LOGIN,:PASSWORD,:L_UPDATE)");

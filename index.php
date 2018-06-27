@@ -7,8 +7,7 @@ require_once("config.php");
 // // echo $root;
 
 //Teste de impressão de todos os registros de uma tabela
-// $AllUsers = User::getList();
-// echo json_encode($AllUsers);
+
 
 //Testando o método que faz a busca por um usuário da tabela tb_users por um login e retorna uma lista com os logins mais próximos informados
 // $search = User::searchList("di");
@@ -20,16 +19,12 @@ require_once("config.php");
 // $TryLogin -> validateLogin("putonho","59");
 // echo $TryLogin;
 
-$newUser = new User();
-$newUser->setNameUser("Gabriel");
-$newUser->setLastNameUser("Chuller");
-$newUser->setBirthDate('2002-11-03');
-$newUser->setEmailUser("chulinho_crei_crei@gmail.com");
-$newUser->setLoginUser("chulis");
-$newUser->setPassword("chulischulisc12");
-$newUser->setLastUpdate(date("Y-m-d H:i:s"));
 
+//Testando a criação de um novo usuário com este método pois envolvem regras do negócio.
+$newUser = new User("Gabriel","Chuler",'2002-11-03',"chulinho_crei_crei@gmail.com","chulis","chulischullis12",date("Y-m-d H:i:s"));
 $newUser->insertUser();
 
-echo $newUser;
+
+$AllUsers = User::getList();
+echo json_encode($AllUsers);
 ?>

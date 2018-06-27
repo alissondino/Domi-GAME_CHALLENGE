@@ -219,7 +219,7 @@ class User{
     public function validateLogin($plogin,$ppassword){
      $sql = new Sql();
      $results = $sql -> select("SELECT * FROM tb_users WHERE  login_user = :LOGIN AND password_user=:PASSWORD",array(
-        ":LOGIN"=>$plogin,
+        ":LOGIN"=>$plogin, 
         ":PASSWORD"=>$ppassword
     ));
      if (count($results)>0){
@@ -235,18 +235,29 @@ public function insertUser(){
 
     $results = $sql -> select("CALL sp_users_insert(
         :NAME,:LAST_NAME,:BIRTH_DATE,:EMAIL,
-        :LOGIN,:PASSWORD,:LAST_UPDATE",array(
-            ':NAME'=>$this->getNameUser();
-            ':LAST_NAME'=>$this->getLastNameUser();
-            ':BIRTH_DATE'=>$this->getBirthDate();
-            ':EMAIL'=>$this->getEmailUser();
-            ':LOGIN'=>$this->getLoginUser();
-            ':PASSWORD'=>$this->getPassword();
-            ':LAST_UPDATE'=>$this->getLastUpdate();
+        :LOGIN,:PASSWORD,:LAST_UPDATE)",array(
+            ':NAME'=>$this->getNameUser(),
+            ':LAST_NAME'=>$this->getLastNameUser(),
+            ':BIRTH_DATE'=>$this->getBirthDate(),
+            ':EMAIL'=>$this->getEmailUser(),
+            ':LOGIN'=>$this->getLoginUser(),
+            ':PASSWORD'=>$this->getPassword(),
+            ':LAST_UPDATE'=>$this->getLastUpdate()
         ));
     if(count($results)>0){
         $this->fillData($results[0]);
     }
+}
+
+public function __construct($p_name_user="", $p_last_name_user="",$p_birth_date_user="",$p_email_user="",$p_login_user="",$p_password_user="",$p_last_update=""){
+    $this->setNameUser($p_name_user);
+    $this->setLastNameUser($p_last_name_user);
+    $this->setBirthDateUser($p_birth_date_user);
+    $this->setEmailUser($p_email_user);
+    $this->setLoginUser($p_login_user);
+    $this->setPassword($p_password_user);
+    $this->setLastUpdate($p_last_update);
+
 }
 
 
